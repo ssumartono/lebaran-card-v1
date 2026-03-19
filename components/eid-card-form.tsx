@@ -13,6 +13,7 @@ const initialForm: CardFormData = {
   colorTheme: 'gold',
   backgroundType: 'grand-arch',
   ratio: '4:5',
+  cardType: 'family',
   includeTableProps: true,
   includeLanterns: true,
   preserveOutfit: false
@@ -132,9 +133,9 @@ export function EidCardForm() {
       <section className="hero-card">
         <div>
           <span className="eyebrow">Gemini AI • Eid Card Studio</span>
-          <h1>Kartu Lebaran premium dari satu foto keluarga</h1>
+          <h1>Kartu Lebaran premium dari satu foto</h1>
           <p>
-            Upload foto, isi nama keluarga, pilih gaya visual, lalu Gemini menyulapnya menjadi kartu Idul Fitri
+            Upload foto, isi nama, pilih tipe kartu dan gaya visual, lalu Gemini menyulapnya menjadi kartu Idul Fitri
             siap kirim. Rapi, hangat, dan berkilau seperti ruang tamu yang baru selesai disetrika.
           </p>
         </div>
@@ -155,16 +156,26 @@ export function EidCardForm() {
             <input type="file" accept="image/*" onChange={handleFile} hidden />
             <div className="upload-inner">
               <ImagePlus size={22} />
-              <span>Upload foto keluarga</span>
+              <span>Upload foto {form.cardType === 'single' ? 'sendiri' : 'keluarga'}</span>
               <small>JPG, PNG, WEBP. Foto frontal paling stabil.</small>
             </div>
           </label>
 
           <div className="field-grid two">
             <label>
-              <span>Nama keluarga</span>
+              <span>Tipe Kartu</span>
+              <select value={form.cardType} onChange={(e) => handleInput('cardType', e.target.value as CardFormData['cardType'])}>
+                <option value="family">Keluarga</option>
+                <option value="single">Satu Orang</option>
+              </select>
+            </label>
+            <label>
+              <span>{form.cardType === 'single' ? 'Nama Anda / Pengirim' : 'Nama keluarga'}</span>
               <input value={form.familyName} onChange={(e) => handleInput('familyName', e.target.value)} />
             </label>
+          </div>
+
+          <div className="field-grid">
             <label>
               <span>Rasio output</span>
               <select value={form.ratio} onChange={(e) => handleInput('ratio', e.target.value as CardFormData['ratio'])}>

@@ -7,6 +7,7 @@ export type CardFormData = {
   colorTheme: 'gold' | 'green' | 'white' | 'emerald-gold';
   backgroundType: 'islamic-living-room' | 'grand-arch' | 'minimal-studio' | 'mosque-hall';
   ratio: '4:5' | '1:1' | '9:16';
+  cardType: 'family' | 'single';
   includeTableProps: boolean;
   includeLanterns: boolean;
   preserveOutfit: boolean;
@@ -42,19 +43,22 @@ export function buildEidPrompt(data: CardFormData): string {
     ? 'Add hanging lanterns with warm glowing light to enrich the festive atmosphere.'
     : 'Do not add hanging lanterns.';
 
+  const subjectStr = data.cardType === 'single' ? 'person' : 'family';
+  const portraitStr = data.cardType === 'single' ? 'solo portrait' : 'family portrait';
+
   const outfitLine = data.preserveOutfit
     ? 'Preserve the original clothing silhouette and modest styling as much as possible while harmonizing textures and festive polish.'
-    : `Dress the family in harmonized modest Eid outfits using the palette ${colorNotes[data.colorTheme]}. Keep the garments elegant and realistic.`;
+    : `Dress the ${subjectStr} in harmonized modest Eid outfits using the palette ${colorNotes[data.colorTheme]}. Keep the garments elegant and realistic.`;
 
   return [
-    'Create a high-end Indonesian Idul Fitri greeting card from the uploaded family photo.',
-    'Preserve 100% facial identity, age impression, body proportions, skin tone, and recognizable features of every person in the source image. No beautification, no face drift, no cartooning, no extra fingers, no anatomy distortion.',
-    'Keep the family facing camera with warm natural smiles and polite salam gesture.',
+    `Create a high-end Indonesian Idul Fitri greeting card from the uploaded ${subjectStr} photo.`,
+    `Preserve 100% facial identity, age impression, body proportions, skin tone, and recognizable features of the ${subjectStr} in the source image. No beautification, no face drift, no cartooning, no extra fingers, no anatomy distortion.`,
+    `Keep the ${subjectStr} facing camera with warm natural smiles and polite salam gesture.`,
     `Visual style: ${styleNotes[data.style]}.`,
     `Background: ${backgroundNotes[data.backgroundType]}.`,
     `Color direction: ${colorNotes[data.colorTheme]}.`,
     'Lighting: warm, soft, elegant, realistic, flattering, with premium festive atmosphere.',
-    'Composition: centered family portrait, balanced layout, professional greeting-card framing, highly readable top text area, portrait orientation.',
+    `Composition: centered ${portraitStr}, balanced layout, professional greeting-card framing, highly readable top text area, portrait orientation.`,
     propsLine,
     lanternLine,
     outfitLine,

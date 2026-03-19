@@ -7,7 +7,7 @@ export type CardFormData = {
   colorTheme: 'gold' | 'green' | 'white' | 'emerald-gold';
   backgroundType: 'islamic-living-room' | 'grand-arch' | 'minimal-studio' | 'mosque-hall';
   ratio: '4:5' | '1:1' | '9:16';
-  cardType: 'family' | 'single';
+  cardType: 'family' | 'single' | 'couple';
   includeTableProps: boolean;
   includeLanterns: boolean;
   preserveOutfit: boolean;
@@ -43,8 +43,8 @@ export function buildEidPrompt(data: CardFormData): string {
     ? 'Add hanging lanterns with warm glowing light to enrich the festive atmosphere.'
     : 'Do not add hanging lanterns.';
 
-  const subjectStr = data.cardType === 'single' ? 'person' : 'family';
-  const portraitStr = data.cardType === 'single' ? 'solo portrait' : 'family portrait';
+  const subjectStr = data.cardType === 'single' ? 'person' : data.cardType === 'couple' ? 'couple' : 'family';
+  const portraitStr = data.cardType === 'single' ? 'solo portrait' : data.cardType === 'couple' ? 'couple portrait' : 'family portrait';
 
   const outfitLine = data.preserveOutfit
     ? 'Preserve the original clothing silhouette and modest styling as much as possible while harmonizing textures and festive polish.'

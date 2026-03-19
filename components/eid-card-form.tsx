@@ -156,7 +156,7 @@ export function EidCardForm() {
             <input type="file" accept="image/*" onChange={handleFile} hidden />
             <div className="upload-inner">
               <ImagePlus size={22} />
-              <span>Upload foto {form.cardType === 'single' ? 'sendiri' : 'keluarga'}</span>
+              <span>Upload foto {form.cardType === 'single' ? 'sendiri' : form.cardType === 'couple' ? 'berdua' : 'keluarga'}</span>
               <small>JPG, PNG, WEBP. Foto frontal paling stabil.</small>
             </div>
           </label>
@@ -166,11 +166,12 @@ export function EidCardForm() {
               <span>Tipe Kartu</span>
               <select value={form.cardType} onChange={(e) => handleInput('cardType', e.target.value as CardFormData['cardType'])}>
                 <option value="family">Keluarga</option>
+                <option value="couple">Dua Orang</option>
                 <option value="single">Satu Orang</option>
               </select>
             </label>
             <label>
-              <span>{form.cardType === 'single' ? 'Nama Anda / Pengirim' : 'Nama keluarga'}</span>
+              <span>{form.cardType === 'single' ? 'Nama Anda / Pengirim' : form.cardType === 'couple' ? 'Nama Pasangan / Kalian' : 'Nama keluarga'}</span>
               <input value={form.familyName} onChange={(e) => handleInput('familyName', e.target.value)} />
             </label>
           </div>

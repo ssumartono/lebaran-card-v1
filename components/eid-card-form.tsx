@@ -5,7 +5,7 @@ import { Download, ImagePlus, LoaderCircle, Sparkles } from 'lucide-react';
 import type { CardFormData } from '@/lib/prompt';
 
 const initialForm: CardFormData = {
-  familyName: 'misteraans & Keluarga',
+  familyName: 'Nama Anda & Keluarga',
   headline: 'Selamat Hari Raya Idul Fitri',
   subheadline: '1 Syawal 1447H',
   apologyLine: 'Minal Aidzin Walfaidzin • Mohon Maaf Lahir dan Batin',
@@ -152,16 +152,15 @@ export function EidCardForm() {
     <div className="studio-shell">
       <section className="hero-card">
         <div>
-          <span className="eyebrow">Gemini AI • Eid Card Studio</span>
-          <h1>Kartu Lebaran premium dari satu foto</h1>
+          <span className="eyebrow">Edisi Spesial Idul Fitri</span>
+          <h1>Buat Kartu Lebaran dalam Sekejap!</h1>
           <p>
-            Upload foto, isi nama, pilih tipe kartu dan gaya visual, lalu Gemini menyulapnya menjadi kartu Idul Fitri
-            siap kirim. Rapi, hangat, dan berkilau seperti ruang tamu yang baru selesai disetrika.
+            Cukup unggah foto Anda, isi nama, dan pilih desain yang disukai. Kecerdasan Buatan (AI) kami akan menyulapnya menjadi kartu ucapan profesional yang siap dibagikan ke keluarga dan kerabat!
           </p>
         </div>
         <div className="hero-badge">
           <Sparkles size={18} />
-          Production-ready Next.js build
+          Ditenagai oleh AI
         </div>
       </section>
 
@@ -169,15 +168,15 @@ export function EidCardForm() {
         <form className="panel" onSubmit={handleSubmit}>
           <div className="panel-header">
             <h2>Pengaturan Kartu</h2>
-            <p>Sesuaikan teks, gaya, dan nuansa visual.</p>
+            <p>Sesuaikan teks ucapan dan desain visual pilihan Anda.</p>
           </div>
 
           <label className="upload-box">
             <input id="file-upload" type="file" accept="image/*" onChange={handleFile} hidden />
             <div className="upload-inner">
               <ImagePlus size={22} />
-              <span>Upload foto {form.cardType === 'single' ? 'sendiri' : form.cardType === 'couple' ? 'berdua' : 'keluarga'}</span>
-              <small>JPG, PNG, WEBP. Foto frontal paling stabil.</small>
+              <span>Pilih foto {form.cardType === 'single' ? 'sendiri' : form.cardType === 'couple' ? 'berdua' : 'keluarga'}</span>
+              <small>Disarankan foto menghadap depan yang jelas.</small>
             </div>
           </label>
 
@@ -198,64 +197,64 @@ export function EidCardForm() {
 
           <div className="field-grid">
             <label>
-              <span>Rasio output</span>
+              <span>Bentuk Kartu</span>
               <select value={form.ratio} onChange={(e) => handleInput('ratio', e.target.value as CardFormData['ratio'])}>
-                <option value="4:5">4:5</option>
-                <option value="1:1">1:1</option>
-                <option value="9:16">9:16</option>
+                <option value="4:5">Tegak - Cocok untuk Instagram Portrait (4:5)</option>
+                <option value="1:1">Kotak - Cocok untuk WhatsApp/Instagram (1:1)</option>
+                <option value="9:16">Memanjang - Cocok untuk Story/Reels (9:16)</option>
               </select>
             </label>
           </div>
 
           <div className="field-grid">
             <label>
-              <span>Judul utama</span>
+              <span>Ucapan Utama</span>
               <input value={form.headline} onChange={(e) => handleInput('headline', e.target.value)} />
             </label>
             <label>
-              <span>Subjudul</span>
+              <span>Keterangan Waktu</span>
               <input value={form.subheadline} onChange={(e) => handleInput('subheadline', e.target.value)} />
             </label>
             <label>
-              <span>Baris ucapan</span>
+              <span>Pesan Tambahan (Opsional)</span>
               <textarea rows={3} value={form.apologyLine} onChange={(e) => handleInput('apologyLine', e.target.value)} />
             </label>
           </div>
 
           <div className="field-grid two">
             <label>
-              <span>Style</span>
+              <span>Gaya Desain</span>
               <select value={form.style} onChange={(e) => handleInput('style', e.target.value as CardFormData['style'])}>
-                <option value="classic">Classic</option>
-                <option value="modern">Modern</option>
-                <option value="minimal">Minimal</option>
-                <option value="luxury">Luxury</option>
+                <option value="classic">Klasik & Tradisional</option>
+                <option value="modern">Modern Elegan</option>
+                <option value="minimal">Minimalis Bersih</option>
+                <option value="luxury">Mewah & Megah</option>
               </select>
             </label>
             <label>
-              <span>Color theme</span>
+              <span>Nuansa Warna</span>
               <select value={form.colorTheme} onChange={(e) => handleInput('colorTheme', e.target.value as CardFormData['colorTheme'])}>
-                <option value="gold">Gold</option>
-                <option value="green">Green</option>
-                <option value="white">White</option>
-                <option value="emerald-gold">Emerald Gold</option>
+                <option value="gold">Emas Hangat</option>
+                <option value="green">Hijau Elegan</option>
+                <option value="white">Putih Suci</option>
+                <option value="emerald-gold">Zamrud & Emas</option>
               </select>
             </label>
             <label>
-              <span>Background</span>
+              <span>Latar Belakang</span>
               <select value={form.backgroundType} onChange={(e) => handleInput('backgroundType', e.target.value as CardFormData['backgroundType'])}>
-                <option value="grand-arch">Grand Arch</option>
-                <option value="islamic-living-room">Islamic Living Room</option>
-                <option value="minimal-studio">Minimal Studio</option>
-                <option value="mosque-hall">Mosque Hall</option>
+                <option value="grand-arch">Lengkungan Megah</option>
+                <option value="islamic-living-room">Ruang Tamu Islami</option>
+                <option value="minimal-studio">Studio Minimalis</option>
+                <option value="mosque-hall">Aula Masjid</option>
               </select>
             </label>
           </div>
 
           <div className="switches">
-            <label><input type="checkbox" checked={form.includeTableProps} onChange={(e) => handleInput('includeTableProps', e.target.checked)} /> Props meja Eid</label>
-            <label><input type="checkbox" checked={form.includeLanterns} onChange={(e) => handleInput('includeLanterns', e.target.checked)} /> Lantern gantung</label>
-            <label><input type="checkbox" checked={form.preserveOutfit} onChange={(e) => handleInput('preserveOutfit', e.target.checked)} /> Pertahankan outfit asli</label>
+            <label><input type="checkbox" checked={form.includeTableProps} onChange={(e) => handleInput('includeTableProps', e.target.checked)} /> Tambahkan hidangan khas Lebaran di depan</label>
+            <label><input type="checkbox" checked={form.includeLanterns} onChange={(e) => handleInput('includeLanterns', e.target.checked)} /> Tambahkan hiasan lampion gantung</label>
+            <label><input type="checkbox" checked={form.preserveOutfit} onChange={(e) => handleInput('preserveOutfit', e.target.checked)} /> Pertahankan bentuk pakaian asli dari foto</label>
           </div>
 
           <div style={{ display: 'flex', gap: '12px' }}>
@@ -274,12 +273,12 @@ export function EidCardForm() {
         <section className="preview-column">
           <div className="panel preview-panel">
             <div className="panel-header">
-              <h2>Preview</h2>
-              <p>Kiri: foto sumber. Kanan: hasil Gemini.</p>
+              <h2>Melihat Hasil</h2>
+              <p>Kiri: foto asli Anda. Kanan: hasil akhir buatan AI.</p>
             </div>
             <div className="preview-grid">
               <div className="preview-frame">
-                <span>Source</span>
+                <span>Foto Asli</span>
                 {state.sourceImage ? (
                   <img
                     id="source-preview"
@@ -287,29 +286,21 @@ export function EidCardForm() {
                     src={`data:${state.mimeType};base64,${state.sourceImage}`}
                   />
                 ) : (
-                  <div className="empty-state">Belum ada foto.</div>
+                  <div className="empty-state">Pilih foto terlebih dahulu.</div>
                 )}
               </div>
               <div className="preview-frame">
-                <span>Generated</span>
+                <span>Hasil Kartu</span>
                 {state.resultImage ? (
                   <img alt="Generated Eid card" src={state.resultImage} />
                 ) : (
-                  <div className="empty-state">Hasil generate akan muncul di sini.</div>
+                  <div className="empty-state">Kartu Anda akan muncul di sini.</div>
                 )}
               </div>
             </div>
             <button className="secondary-button" type="button" onClick={downloadResult} disabled={!state.resultImage}>
-              <Download size={18} /> Download hasil
+              <Download size={18} /> Simpan Hasil ke Perangkat
             </button>
-          </div>
-
-          <div className="panel prompt-panel">
-            <div className="panel-header">
-              <h2>Prompt yang dipakai</h2>
-              <p>Bisa kamu tweak untuk eksperimen batch.</p>
-            </div>
-            <pre>{state.promptUsed || 'Prompt final akan tampil di sini setelah generate.'}</pre>
           </div>
         </section>
       </div>

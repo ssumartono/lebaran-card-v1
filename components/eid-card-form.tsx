@@ -128,6 +128,26 @@ export function EidCardForm() {
     anchor.click();
   };
 
+  const handleClear = () => {
+    setForm(initialForm);
+    setState({
+      loading: false,
+      error: '',
+      resultImage: '',
+      sourceImage: '',
+      mimeType: '',
+      promptUsed: ''
+    });
+    const img = document.getElementById('source-preview') as HTMLImageElement | null;
+    if (img) {
+      img.removeAttribute('src');
+    }
+    const fileInput = document.getElementById('file-upload') as HTMLInputElement | null;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  };
+
   return (
     <div className="studio-shell">
       <section className="hero-card">
@@ -153,7 +173,7 @@ export function EidCardForm() {
           </div>
 
           <label className="upload-box">
-            <input type="file" accept="image/*" onChange={handleFile} hidden />
+            <input id="file-upload" type="file" accept="image/*" onChange={handleFile} hidden />
             <div className="upload-inner">
               <ImagePlus size={22} />
               <span>Upload foto {form.cardType === 'single' ? 'sendiri' : form.cardType === 'couple' ? 'berdua' : 'keluarga'}</span>
@@ -238,10 +258,15 @@ export function EidCardForm() {
             <label><input type="checkbox" checked={form.preserveOutfit} onChange={(e) => handleInput('preserveOutfit', e.target.checked)} /> Pertahankan outfit asli</label>
           </div>
 
-          <button className="primary-button" type="submit" disabled={!canGenerate || state.loading}>
-            {state.loading ? <LoaderCircle className="spin" size={18} /> : <Sparkles size={18} />}
-            {state.loading ? 'Generating...' : 'Generate kartu lebaran'}
-          </button>
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <button className="primary-button" type="submit" disabled={!canGenerate || state.loading} style={{ flex: 1 }}>
+              {state.loading ? <LoaderCircle className="spin" size={18} /> : <Sparkles size={18} />}
+              {state.loading ? 'Generating...' : 'Generate kartu lebaran'}
+            </button>
+            <button className="secondary-button" type="button" onClick={handleClear} disabled={state.loading} style={{ margin: 0, padding: '14px 24px' }}>
+              Clear
+            </button>
+          </div>
 
           {state.error ? <div className="error-box">{state.error}</div> : null}
         </form>
